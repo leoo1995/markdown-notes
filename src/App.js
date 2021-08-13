@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { createGlobalStyle } from "styled-components"
+import Header from "./components/Header"
+import Note from "./components/Note"
+import NoteSearch from "./components/NoteSearch"
+const GlobalStyles = createGlobalStyle`
 
+  body{
+    margin: 0;
+    padding: 0;
+  }
+  .App{
+    min-height: 100vh;
+    box-sizing: border-box;
+  }
+`
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <GlobalStyles />
+      <Header />
+      <NoteSearch />
+      <Note />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
