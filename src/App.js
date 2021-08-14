@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components"
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from "./components/Header"
+import Login from "./components/Login"
 import Note from "./components/Note"
 import NoteSearch from "./components/NoteSearch"
 const GlobalStyles = createGlobalStyle`
@@ -11,15 +13,23 @@ const GlobalStyles = createGlobalStyle`
   .App{
     min-height: 100vh;
     box-sizing: border-box;
+    /* background: red; */
   }
 `
 function App() {
   return (
     <div className="App">
       <GlobalStyles />
-      <Header />
-      <NoteSearch />
-      <Note />
+      <Router>
+        <Header />
+        <Switch>
+          <Route path="/login">
+            <Login />
+          </Route>
+          <NoteSearch />
+          <Note />
+        </Switch>
+      </Router>
     </div>
   )
 }
