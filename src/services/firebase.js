@@ -13,21 +13,21 @@ const firebaseConfig = {
 // Initialize Firebase
 app.initializeApp(firebaseConfig)
 const db = app.firestore()
+db.settings({
+  timestampsInSnapshots: true
+})
 const auth = app.auth()
-const login = () => {
+export const login = () => {
   const provider = new app.auth.GoogleAuthProvider()
   auth.signInWithPopup(provider)
 }
-const logout = () => {
+export const logout = () => {
   auth.signOut()
 }
-const updateNote = note =>
-  db
-    .collection("notes")
-    .doc(note.id)
-    .update({ body: note.body, title: note.title })
+export const updateNote = (note, uid) =>
+  db.collection(uid).doc(note.id).update({ body: note.body, title: note.title })
 
-const addNewNote = () =>
-  db.collection("notes").add({ body: "", title: "", date: new Date() })
-const deleteNote = id => db.collection("notes").doc(id).delete()
-export { app, db, auth, login, logout, updateNote, addNewNote, deleteNote }
+export const addNewNote = uid =>
+  db.collection(uid).add({ body: "", title: "", date: new Date() })
+export const deleteNote = (id, uid) => db.collection(uid).doc(id).delete()
+export { app, db, auth }

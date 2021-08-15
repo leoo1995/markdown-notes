@@ -6,7 +6,7 @@ import remarkGfm from "remark-gfm"
 import { NotesContext } from "../../context/NotesContext"
 import { addNewNote, deleteNote, updateNote } from "../../services/firebase"
 const Note = () => {
-  const { currentNote, setCurrentNote } = useContext(NotesContext)
+  const { currentNote, setCurrentNote, user } = useContext(NotesContext)
 
   const handleChange = event => {
     setCurrentNote({
@@ -21,7 +21,7 @@ const Note = () => {
     <StyledNote>
       <button
         onClick={() => {
-          addNewNote().then(refData =>
+          addNewNote(user.uid).then(refData =>
             refData.get().then(item => {
               setCurrentNote({ id: refData.id, ...item.data() })
             })
@@ -48,13 +48,15 @@ const Note = () => {
       <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]} />
       <button
         onClick={() => {
-          updateNote(currentNote)
+          updateNote(currentNote, user.uid)
         }}
       >
         save note
       </button>
       <button>close note</button>
-      <button onClick={() => deleteNote(currentNote.id)}>delete note</button>
+      <button onClick={() => deleteNote(currentNote.id, user.uid)}>
+        delete note
+      </button>
     </StyledNote>
   )
 }

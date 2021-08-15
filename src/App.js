@@ -22,19 +22,19 @@ function App() {
     <div className="App">
       <GlobalStyles />
       <Router>
-        <Header />
+        <NotesProvider>
+          <Header />
 
-        <Switch>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route>
-            <NotesProvider>
+          <Switch>
+            <Route path="/login">
+              <Login />
+            </Route>
+            <Route>
               <NoteSearch />
               <Note />
-            </NotesProvider>
-          </Route>
-        </Switch>
+            </Route>
+          </Switch>
+        </NotesProvider>
       </Router>
     </div>
   )
