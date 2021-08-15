@@ -14,5 +14,6 @@ export const StyledListNotes = styled.ul`
     background: lightcoral;
     padding: 3px;
     border-radius: 4px;
+    cursor: pointer;
   }
 `

@@ -1,22 +1,60 @@
-import { useForm } from "../../hooks/useForm"
+import { useContext } from "react"
+import dayjs from "dayjs"
 import { StyledNote } from "./styles"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
+import { NotesContext } from "../../context/NotesContext"
+import { addNewNote, deleteNote, updateNote } from "../../services/firebase"
 const Note = () => {
-  const [note, handleChange] = useForm({ bodyNote: `` })
-  const markdown = note.bodyNote
+  const { currentNote, setCurrentNote } = useContext(NotesContext)
+
+  const handleChange = event => {
+    setCurrentNote({
+      ...currentNote,
+      body: event.target.value,
+      title: event.target.value.slice(0, 20).trim()
+    })
+  }
+
+  const markdown = currentNote.body
   return (
     <StyledNote>
+      <button
+        onClick={() => {
+          addNewNote().then(refData =>
+            refData.get().then(item => {
+              setCurrentNote({ id: refData.id, ...item.data() })
+            })
+          )
+        }}
+      >
+        Add note
+      </button>
       <div className="note-editor">
         <textarea
-          name="bodyNote"
-          value={note.bodyNote}
+          name="body"
+          value={markdown}
           onChange={handleChange}
         ></textarea>
 
-        <span>{"jueves 13 de agosto"}</span>
+        <span>
+          {currentNote
+            ? `${dayjs(currentNote?.date?.toDate()).format(
+                "[Created on ]DD MMM"
+              )}, contains ${currentNote?.body?.split(" ").length}`
+            : undefined}
+        </span>
       </div>
       <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]} />
+      <button
+        onClick={() => {
+          updateNote(currentNote)
+        }}
+      >
+        save note
+      </button>
+      <button>close note</button>
+      <button onClick={() => deleteNote(currentNote.id)}>delete note</button>
     </StyledNote>
   )
 }

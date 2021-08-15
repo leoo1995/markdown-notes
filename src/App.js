@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components"
+import { NotesProvider } from "./context/NotesContext"
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
 import Header from "./components/Header"
 import Login from "./components/Login"
@@ -22,12 +23,17 @@ function App() {
       <GlobalStyles />
       <Router>
         <Header />
+
         <Switch>
           <Route path="/login">
             <Login />
           </Route>
-          <NoteSearch />
-          <Note />
+          <Route>
+            <NotesProvider>
+              <NoteSearch />
+              <Note />
+            </NotesProvider>
+          </Route>
         </Switch>
       </Router>
     </div>

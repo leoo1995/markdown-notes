@@ -1,11 +1,10 @@
 import React from "react"
-import { auth, app } from "../../firebase"
+import { login } from "../../services/firebase"
 import { StyledLogin } from "./styles"
 
 const Login = () => {
-  const handleClick = event => {
-    const provider = new app.auth.GoogleAuthProvider()
-    auth.signInWithPopup(provider)
+  const handleClick = () => {
+    login()
   }
   return (
     <StyledLogin>
