@@ -1,14 +1,21 @@
 import { useContext } from "react"
 import dayjs from "dayjs"
-import { StyledNote } from "./styles"
+import { StyledNote, StyledModalContainer } from "./styles"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { NotesContext } from "../../context/NotesContext"
-import { addNewNote, deleteNote, updateNote } from "../../services/firebase"
-import { Link, withLink } from "react-router-dom"
+import { deleteNote, updateNote } from "../../services/firebase"
+import { Link } from "react-router-dom"
+import Modal from "../Modal"
+import { useModal } from "../../hooks/useModal"
+
 const Note = props => {
   const { currentNote, setCurrentNote, user } = useContext(NotesContext)
-
+  const [isDeleteModalOpen, openDeleteModal, closeDeleteModal] = useModal()
+  const handleDelete = () => {
+    deleteNote(currentNote.id, user.uid)
+    closeDeleteModal()
+  }
   const handleChange = event => {
     setCurrentNote({
       ...currentNote,
@@ -20,17 +27,6 @@ const Note = props => {
   const markdown = currentNote.body
   return (
     <StyledNote>
-      {/* <button
-        onClick={() => {
-          addNewNote(user.uid).then(refData =>
-            refData.get().then(item => {
-              setCurrentNote({ id: refData.id, ...item.data() })
-            })
-          )
-        }}
-      >
-        Add note
-      </button> */}
       <div className="note-editor">
         <textarea
           name="body"
@@ -51,12 +47,19 @@ const Note = props => {
         save note
       </button>
       <Link to="/dashboard">close note</Link>
-      <Link
-        to="/dashboard"
-        onClick={() => deleteNote(currentNote.id, user.uid)}
+      <button onClick={() => openDeleteModal()}>Delete</button>
+
+      <Modal
+        isOpen={isDeleteModalOpen}
+        openModal={openDeleteModal}
+        closeModal={closeDeleteModal}
+        stylesContainer={StyledModalContainer}
       >
-        delete note
-      </Link>
+        Are you sure to delete this note?{" "}
+        <Link to="/dashboard" onClick={handleDelete}>
+          delete note
+        </Link>
+      </Modal>
     </StyledNote>
   )
 }

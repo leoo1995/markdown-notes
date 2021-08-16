@@ -1,17 +1,10 @@
 import { useContext } from "react"
 import { NotesContext } from "../../context/NotesContext"
-import { auth, login, logout } from "../../services/firebase"
+import { login, logout } from "../../services/firebase"
 import { StyledHeader } from "./styles"
 
 const Header = () => {
   const { user } = useContext(NotesContext)
-  // const [user, setUser] = useState(null)
-  // useEffect(function () {
-  //   auth.onAuthStateChanged(user => {
-  //     if (user) setUser(user)
-  //     else setUser(null)
-  //   })
-  // }, [])
 
   return (
     <StyledHeader>
@@ -31,9 +24,6 @@ const Header = () => {
             <button onClick={login}>Sign in</button>
           </li>
         )}
-        <li>
-          <span>{user?.displayName}</span>
-        </li>
       </nav>
       {user ? (
         <img src={user?.photoURL} alt="profile" className="profile" />

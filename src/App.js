@@ -14,11 +14,12 @@ const GlobalStyles = createGlobalStyle`
   body{
     margin: 0;
     padding: 0;
+    font-family: sans-serif;
   }
   .App{
     min-height: 100vh;
     box-sizing: border-box;
-    /* background: red; */
+   
   }
 `
 function App(props) {

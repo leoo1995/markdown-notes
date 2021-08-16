@@ -1,11 +1,11 @@
 import styled from "styled-components"
 
-export const StyledListNotes = styled.ul`
+export const StyledListNotes = styled.div`
   width: 100%;
   list-style: none;
   padding: 0;
   box-sizing: border-box;
-  overflow-y: scroll;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   gap: 3px;

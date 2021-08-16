@@ -1,8 +1,6 @@
-import { useEffect, useContext } from "react"
-import { withRouter } from "react-router-dom"
-import { auth, login } from "../../services/firebase"
+import { login } from "../../services/firebase"
 import { StyledLogin } from "./styles"
-import { NotesContext } from "../../context/NotesContext"
+
 const Login = props => {
   const handleClick = () => login()
   return (

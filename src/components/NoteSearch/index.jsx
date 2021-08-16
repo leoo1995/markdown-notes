@@ -7,7 +7,7 @@ import { NotesContext } from "../../context/NotesContext"
 import { useContext } from "react"
 import { withRouter } from "react-router"
 const NoteSearch = props => {
-  const { setCurrentNote, currentNote, user } = useContext(NotesContext)
+  const { setCurrentNote, user } = useContext(NotesContext)
   const [value, handleChange] = useForm({ keyWord: "" })
   return (
     <StyledSearch>
@@ -33,7 +33,7 @@ const NoteSearch = props => {
       >
         Add note
       </button>
-      <NoteList />
+      <NoteList keyword={value.keyWord} />
     </StyledSearch>
   )
 }
