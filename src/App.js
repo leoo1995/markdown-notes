@@ -1,10 +1,14 @@
+//libraries
 import { createGlobalStyle } from "styled-components"
-import { NotesProvider } from "./context/NotesContext"
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom"
+import { Switch, Route, Redirect } from "react-router-dom"
+//context provider
+import NotesProvider from "./context/NotesContext"
+//components
 import Header from "./components/Header"
 import Login from "./components/Login"
 import Note from "./components/Note"
 import NoteSearch from "./components/NoteSearch"
+
 const GlobalStyles = createGlobalStyle`
 
   body{
@@ -17,25 +21,21 @@ const GlobalStyles = createGlobalStyle`
     /* background: red; */
   }
 `
-function App() {
+function App(props) {
   return (
     <div className="App">
       <GlobalStyles />
-      <Router>
-        <NotesProvider>
-          <Header />
 
-          <Switch>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route>
-              <NoteSearch />
-              <Note />
-            </Route>
-          </Switch>
-        </NotesProvider>
-      </Router>
+      <NotesProvider>
+        <Header />
+
+        <Route path="/dashboard" component={NoteSearch} />
+        <Switch>
+          <Route path="/dashboard/:id" component={Note} />
+          <Route path="/login" exact component={Login} />
+          <Redirect from="/" to="/dashboard" />
+        </Switch>
+      </NotesProvider>
     </div>
   )
 }

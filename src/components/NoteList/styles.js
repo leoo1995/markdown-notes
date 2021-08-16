@@ -9,11 +9,16 @@ export const StyledListNotes = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 3px;
-  /* align-items: flex-start; */
-  li {
+
+  a {
     background: lightcoral;
     padding: 3px;
     border-radius: 4px;
     cursor: pointer;
+    text-decoration: none;
+    color: black;
+  }
+  .active {
+    background: lightcyan;
   }
 `

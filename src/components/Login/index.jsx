@@ -1,11 +1,10 @@
-import React from "react"
-import { login } from "../../services/firebase"
+import { useEffect, useContext } from "react"
+import { withRouter } from "react-router-dom"
+import { auth, login } from "../../services/firebase"
 import { StyledLogin } from "./styles"
-
-const Login = () => {
-  const handleClick = () => {
-    login()
-  }
+import { NotesContext } from "../../context/NotesContext"
+const Login = props => {
+  const handleClick = () => login()
   return (
     <StyledLogin>
       <h3>You have to be logged to procced</h3>

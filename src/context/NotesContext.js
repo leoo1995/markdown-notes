@@ -1,8 +1,9 @@
 import { createContext, useState, useEffect } from "react"
 import { db, auth } from "../services/firebase"
+import { withRouter } from "react-router-dom"
 export const NotesContext = createContext()
 
-export const NotesProvider = ({ children }) => {
+const NotesProvider = props => {
   const [state, setState] = useState({ notes: [], currentNote: {}, user: null })
 
   const setCurrentNote = note => setState(s => ({ ...s, currentNote: note }))
@@ -23,7 +24,11 @@ export const NotesProvider = ({ children }) => {
                 notes
               }))
             })
-          } else setState(s => ({ ...s, user: null }))
+            props.history.push("/")
+          } else {
+            props.history.push("/login")
+            setState(s => ({ ...s, user: null }))
+          }
         })
       } catch (e) {
         console.log(e)
@@ -41,7 +46,8 @@ export const NotesProvider = ({ children }) => {
         setCurrentNote
       }}
     >
-      {children}
+      {props.children}
     </NotesContext.Provider>
   )
 }
+export default withRouter(NotesProvider)

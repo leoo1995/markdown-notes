@@ -5,7 +5,8 @@ import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { NotesContext } from "../../context/NotesContext"
 import { addNewNote, deleteNote, updateNote } from "../../services/firebase"
-const Note = () => {
+import { Link, withLink } from "react-router-dom"
+const Note = props => {
   const { currentNote, setCurrentNote, user } = useContext(NotesContext)
 
   const handleChange = event => {
@@ -19,7 +20,7 @@ const Note = () => {
   const markdown = currentNote.body
   return (
     <StyledNote>
-      <button
+      {/* <button
         onClick={() => {
           addNewNote(user.uid).then(refData =>
             refData.get().then(item => {
@@ -29,7 +30,7 @@ const Note = () => {
         }}
       >
         Add note
-      </button>
+      </button> */}
       <div className="note-editor">
         <textarea
           name="body"
@@ -46,17 +47,16 @@ const Note = () => {
         </span>
       </div>
       <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]} />
-      <button
-        onClick={() => {
-          updateNote(currentNote, user.uid)
-        }}
-      >
+      <button onClick={() => updateNote(currentNote, user.uid)}>
         save note
       </button>
-      <button>close note</button>
-      <button onClick={() => deleteNote(currentNote.id, user.uid)}>
+      <Link to="/dashboard">close note</Link>
+      <Link
+        to="/dashboard"
+        onClick={() => deleteNote(currentNote.id, user.uid)}
+      >
         delete note
-      </button>
+      </Link>
     </StyledNote>
   )
 }

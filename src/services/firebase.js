@@ -1,7 +1,7 @@
 import app from "firebase/app"
 import "firebase/firestore"
 import "firebase/auth"
-
+import { Redirect } from "react-router-dom"
 const firebaseConfig = {
   apiKey: "AIzaSyDR1EfERlSCg5uZ261IwAj7gnXTxUo_gnw",
   authDomain: "markdown-notes-65f6e.firebaseapp.com",
@@ -28,6 +28,8 @@ export const updateNote = (note, uid) =>
   db.collection(uid).doc(note.id).update({ body: note.body, title: note.title })
 
 export const addNewNote = uid =>
-  db.collection(uid).add({ body: "", title: "", date: new Date() })
+  db
+    .collection(uid)
+    .add({ body: "New note", title: "New note", date: new Date() })
 export const deleteNote = (id, uid) => db.collection(uid).doc(id).delete()
 export { app, db, auth }
