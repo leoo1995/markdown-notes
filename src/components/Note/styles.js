@@ -40,7 +40,7 @@ export const StyledNote = styled.div`
     border: 1px solid #bbb;
     overflow: auto;
     border-radius: 4px;
-
+    max-height: 500px;
     @media ${device.laptop} {
       > p {
         min-height: 100px;
