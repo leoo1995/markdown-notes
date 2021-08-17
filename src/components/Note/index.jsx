@@ -38,7 +38,7 @@ const Note = props => {
           {currentNote
             ? `${dayjs(currentNote?.date?.toDate()).format(
                 "[Created on ]DD MMM"
-              )}, contains ${currentNote?.body?.split(" ").length}`
+              )}, contains ${currentNote?.body?.trim().split(" ").length}`
             : undefined}
         </span>
       </div>
