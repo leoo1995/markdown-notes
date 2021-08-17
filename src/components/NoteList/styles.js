@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const StyledListNotes = styled.div`
   width: 100%;
+
   list-style: none;
   padding: 0;
   box-sizing: border-box;
@@ -11,14 +12,15 @@ export const StyledListNotes = styled.div`
   gap: 3px;
 
   a {
-    background: lightcoral;
+    background: lightslategray;
     padding: 3px;
     border-radius: 4px;
     cursor: pointer;
     text-decoration: none;
-    color: black;
+    color: white;
   }
   .active {
-    background: lightcyan;
+    background: lightgreen;
+    color: lightslategray;
   }
 `

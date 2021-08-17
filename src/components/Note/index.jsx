@@ -42,12 +42,24 @@ const Note = props => {
             : undefined}
         </span>
       </div>
-      <ReactMarkdown children={markdown} remarkPlugins={[remarkGfm]} />
-      <button onClick={() => updateNote(currentNote, user.uid)}>
-        save note
-      </button>
-      <Link to="/dashboard">close note</Link>
-      <button onClick={() => openDeleteModal()}>Delete</button>
+      <div className="buttons">
+        <button
+          className="save-button"
+          onClick={() => updateNote(currentNote, user.uid)}
+        >
+          Save note
+        </button>
+        <Link to="/dashboard">Close note</Link>
+        <button onClick={() => openDeleteModal()} className="delete-button">
+          Delete
+        </button>
+      </div>
+
+      <ReactMarkdown
+        className="innerHTML"
+        children={markdown}
+        remarkPlugins={[remarkGfm]}
+      />
 
       <Modal
         isOpen={isDeleteModalOpen}
@@ -55,9 +67,9 @@ const Note = props => {
         closeModal={closeDeleteModal}
         stylesContainer={StyledModalContainer}
       >
-        Are you sure to delete this note?{" "}
+        Are you sure to delete this note?
         <Link to="/dashboard" onClick={handleDelete}>
-          delete note
+          Delete note
         </Link>
       </Modal>
     </StyledNote>

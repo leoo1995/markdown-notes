@@ -6,6 +6,7 @@ export const StyledHeader = styled.header`
   height: 60px;
   box-sizing: border-box;
   display: flex;
+  gap: 10px;
   background: lightgreen;
   align-items: center;
   img {

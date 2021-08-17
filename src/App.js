@@ -8,6 +8,7 @@ import Header from "./components/Header"
 import Login from "./components/Login"
 import Note from "./components/Note"
 import NoteSearch from "./components/NoteSearch"
+import Container from "./components/Container"
 
 const GlobalStyles = createGlobalStyle`
 
@@ -20,6 +21,7 @@ const GlobalStyles = createGlobalStyle`
     min-height: 100vh;
     box-sizing: border-box;
    
+   
   }
 `
 function App(props) {
@@ -29,13 +31,14 @@ function App(props) {
 
       <NotesProvider>
         <Header />
-
-        <Route path="/dashboard" component={NoteSearch} />
-        <Switch>
-          <Route path="/dashboard/:id" component={Note} />
-          <Route path="/login" exact component={Login} />
-          <Redirect from="/" to="/dashboard" />
-        </Switch>
+        <Container>
+          <Route path="/dashboard" component={NoteSearch} />
+          <Switch>
+            <Route path="/dashboard/:id" component={Note} />
+            <Route path="/login" exact component={Login} />
+            <Redirect from="/" to="/dashboard" />
+          </Switch>
+        </Container>
       </NotesProvider>
     </div>
   )
