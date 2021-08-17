@@ -38,13 +38,10 @@ export const StyledNote = styled.div`
   }
   .innerHTML {
     border: 1px solid #bbb;
-    overflow: auto;
     border-radius: 4px;
-    max-height: 500px;
+    overflow: auto;
     @media ${device.laptop} {
-      > p {
-        min-height: 100px;
-      }
+      max-height: 500px;
       max-width: 100%;
       grid-column: 2/3;
     }

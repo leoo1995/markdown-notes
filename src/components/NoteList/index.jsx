@@ -7,7 +7,11 @@ const NoteList = ({ keyword }) => {
   const [filteredNotes, setFilteredNotes] = useState(notes)
   useEffect(() => {
     if (keyword !== "") {
-      setFilteredNotes(notes.filter(note => note.body.includes(keyword)))
+      setFilteredNotes(
+        notes.filter(note =>
+          note.body.toLowerCase().includes(keyword.toLowerCase())
+        )
+      )
     } else {
       setFilteredNotes(notes)
     }
