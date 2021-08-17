@@ -38,7 +38,7 @@ export const StyledNote = styled.div`
   }
   .innerHTML {
     border: 1px solid #bbb;
-    overflow-x: auto;
+    overflow: auto;
     border-radius: 4px;
 
     @media ${device.laptop} {
