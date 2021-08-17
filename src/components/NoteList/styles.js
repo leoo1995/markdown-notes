@@ -2,7 +2,7 @@ import styled from "styled-components"
 
 export const StyledListNotes = styled.div`
   width: 100%;
-
+  overflow-y: auto;
   list-style: none;
   padding: 0;
   box-sizing: border-box;
@@ -10,6 +10,7 @@ export const StyledListNotes = styled.div`
   display: flex;
   flex-direction: column;
   gap: 3px;
+  max-height: 500px;
 
   a {
     background: lightslategray;
